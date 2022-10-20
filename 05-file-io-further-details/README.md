@@ -13,7 +13,7 @@ Where does the data appear in the file? Why?
 The data appears at the end of the file. When a file is opened with `O_APPEND`,
 seeking to the start of the file has no effect.
 
-- [Go](go/cmd/append)
+- [Go](go/cmd/seek_append)
 
 ## Exericse 5-3
 
@@ -67,3 +67,5 @@ separate cursors for the file descriptor and wrote their bytes at their
 respective cursor location. The `lseek()` and `write()` calls of each process
 happened in a nondeterministic order which resulted in `f2` having a smaller
 file size than `f1`.
+
+- [Go](go/cmd/atomic_append)
