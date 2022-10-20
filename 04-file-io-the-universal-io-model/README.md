@@ -16,3 +16,15 @@ the `getopt()` function, which can be used to parse command-line options.)
 ### Answer
 
 - [Go](go/cmd/tee)
+
+## Exercise 4-2
+
+### Question
+
+Write a program like `cp` that, when used to copy a regular file that contains
+holes (sequence of null bytes), also creates corresponding holds in the target
+file.
+
+### Answer
+
+- [Go](go/cmd/cp)
