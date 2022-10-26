@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"os"
@@ -18,32 +17,30 @@ func main() {
 }
 
 func run() error {
-	fd, err := dup(uintptr(syscall.Stdout))
+	fd1, err := dup(uintptr(syscall.Stdout))
 	if err != nil {
 		return err
 	}
-	defer syscall.Close(fd)
+	defer syscall.Close(fd1)
 
-	buf := new(bytes.Buffer)
-
-	buf.WriteString(fmt.Sprintf("dup() -> %d\n", fd))
-	_, err = syscall.Write(fd, buf.Bytes())
-	if err != nil {
-		return err
-	}
-
-	fd2, err := dup2(uintptr(fd), uintptr(fd)+5)
+	fd2, err := dup(uintptr(syscall.Stdout))
 	if err != nil {
 		return err
 	}
 	defer syscall.Close(fd2)
 
-	buf.Reset()
-
-	buf.WriteString(fmt.Sprintf("dup2() -> %d\n", fd2))
-	_, err = syscall.Write(fd2, buf.Bytes())
+	fd1Info, err := unix.FcntlInt(uintptr(fd1), unix.F_GETFD, 0)
 	if err != nil {
 		return err
+	}
+
+	fd2Info, err := unix.FcntlInt(uintptr(fd2), unix.F_GETFD, 0)
+	if err != nil {
+		return err
+	}
+
+	if fd1Info != fd2Info {
+		return errors.New("duplicated file descriptors do not match")
 	}
 
 	return nil

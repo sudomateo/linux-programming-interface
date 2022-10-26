@@ -85,3 +85,14 @@ succeeds. If `oldfd` is not valid, then the function should return -1 with
 ### Answer
 
 - [Go](go/cmd/dup)
+
+## Exercise 5-5
+
+### Question
+
+Write a program to verify that duplicated file descriptors share a file offset
+value and open file status flags.
+
+### Answer
+
+- [Go](go/cmd/dup)
