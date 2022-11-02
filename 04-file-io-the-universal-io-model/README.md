@@ -16,6 +16,7 @@ the `getopt()` function, which can be used to parse command-line options.)
 ### Answer
 
 - [Go](go/cmd/tee)
+- [Rust](rust/tee)
 
 ## Exercise 4-2
 
